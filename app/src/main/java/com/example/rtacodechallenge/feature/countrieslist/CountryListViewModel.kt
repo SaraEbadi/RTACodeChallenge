@@ -12,7 +12,7 @@ import retrofit2.Response
 
 class CountryListViewModel(private val repository: CountriesRepository) : ViewModel() {
 
-    private val _selectedList: MutableLiveData<List<String>> = MutableLiveData()
+    private val _selectedList = MutableLiveData<List<String>>()
 
     val selectedList: LiveData<List<String>>?
         get() = _selectedList
@@ -24,7 +24,7 @@ class CountryListViewModel(private val repository: CountriesRepository) : ViewMo
     }
 
     fun getCountriesList(): LiveData<UseCaseResponse<List<Country>>> {
-        val liveData : MutableLiveData<UseCaseResponse<List<Country>>> = MutableLiveData()
+        val liveData: MutableLiveData<UseCaseResponse<List<Country>>> = MutableLiveData()
         viewModelScope.launch {
             liveData.postValue(handleCountriesListResponse(repository.getCountries()))
         }
@@ -40,11 +40,11 @@ class CountryListViewModel(private val repository: CountriesRepository) : ViewMo
         return UseCaseResponse.Error(response.message())
     }
 
-    fun handleToggleItemsSelection(country: Country){
+    fun handleToggleItemsSelection(country: Country) {
         country.apply {
             if (isAdded) {
                 selectedCountriesList.add(name)
-            }else
+            } else
                 selectedCountriesList.remove(name)
         }
         _selectedList.value = selectedCountriesList

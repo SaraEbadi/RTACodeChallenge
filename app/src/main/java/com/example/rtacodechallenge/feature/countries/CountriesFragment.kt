@@ -24,8 +24,9 @@ class CountriesFragment : BaseFragment() {
     }
 
     private fun setUpViews() {
-        val x = viewModel.getLiveData().value
-        tvCountries.text = x?.joinToString { it }
+        viewModel.getLiveData().observe(viewLifecycleOwner,{list->
+            tvCountries.text = list.joinToString { it }
+        })
 
 
         btnChooseCountries.setOnClickListener {

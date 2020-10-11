@@ -12,6 +12,7 @@ import com.example.rtacodechallenge.data.model.CountriesList
 import com.example.rtacodechallenge.data.model.Country
 import com.example.rtacodechallenge.utils.UseCaseResponse
 import kotlinx.android.synthetic.main.fragment_countries_list.*
+import org.koin.android.viewmodel.ext.android.sharedViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.util.*
 
@@ -22,7 +23,7 @@ import java.util.*
 class CountriesListFragment : BaseFragment() {
     override val layout: Int
         get() = R.layout.fragment_countries_list
-    private val viewModel: CountryListViewModel by viewModel()
+    private val viewModel: CountryListViewModel by sharedViewModel()
     private var countriesList = listOf<Country>()
     private lateinit var countryAdapter: CountryAdapter
 
