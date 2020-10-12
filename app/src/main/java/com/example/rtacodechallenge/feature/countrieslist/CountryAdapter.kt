@@ -1,10 +1,8 @@
 package com.example.rtacodechallenge.feature.countrieslist
 
-import android.content.res.ColorStateList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rtacodechallenge.R
@@ -20,12 +18,12 @@ class CountryAdapter(
     fun submitList(newCountriesList: List<Country>) {
         val diffCallback = CountryListDiffCallback(countriesList, newCountriesList)
         val diffResult = DiffUtil.calculateDiff(diffCallback, false)
-        updateItem(newCountriesList.toMutableList())
+        updateItem(newCountriesList)
         diffResult.dispatchUpdatesTo(this@CountryAdapter)
     }
 
-    fun updateItem(list: MutableList<Country>) {
-        countriesList = list
+    fun updateItem(list: List<Country>) {
+        countriesList = list.toMutableList()
         notifyDataSetChanged()
     }
 
@@ -45,46 +43,12 @@ class CountryAdapter(
 
         fun bind(country: Country) {
             with(itemView) {
-                tvCountryName.text = country.name
-                if (country.isAdded) {
-                    btnAdd.backgroundTintList = ColorStateList.valueOf(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.colorDarkGray
-                        )
-                    )
-                    btnAdd.text = "Added"
-                } else {
-                    btnAdd.backgroundTintList = ColorStateList.valueOf(
-                        ContextCompat.getColor(
-                            context,
-                            R.color.colorPrimary
-                        )
-                    )
-
-                    btnAdd.text = "Add"
-                }
-                btnAdd.setOnClickListener {
-                    country.isAdded = !country.isAdded
-                    if (country.isAdded) {
-                        btnAdd.backgroundTintList = ColorStateList.valueOf(
-                            ContextCompat.getColor(
-                                context,
-                                R.color.colorDarkGray
-                            )
-                        )
-                        btnAdd.text = "Added"
-                    } else {
-                        btnAdd.backgroundTintList = ColorStateList.valueOf(
-                            ContextCompat.getColor(
-                                context,
-                                R.color.colorPrimary
-                            )
-                        )
-
-                        btnAdd.text = "Add"
-                    }
-                    countryAdapterCallback.onAddClicked(country)
+                    tvCountryName.text = country.name
+                    btnAdd.toggleSelection(country.isAdd)
+                    btnAdd.setOnClickListener {
+                        country.isAdd = !country.isAdd
+                        btnAdd.toggleSelection(country.isAdd)
+                        countryAdapterCallback.onAddClicked(country)
                 }
             }
         }

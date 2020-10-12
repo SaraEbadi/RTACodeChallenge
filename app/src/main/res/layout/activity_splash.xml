@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/flSplash"
+    tools:context=".feature.splash.SplashActivity">
+
+    <androidx.core.widget.ContentLoadingProgressBar
+        android:id="@+id/pgCenter"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="50dp"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:indeterminateTint="@color/colorPrimaryDark"
+        />
+
+    <LinearLayout
+        android:id="@+id/llErrorCenter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        tools:visibility="visible">
+
+        <TextView
+            android:id="@+id/tvNetworkConnection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginEnd="42dp"
+            android:layout_marginBottom="42dp"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:text="@string/connection_network"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btnRetry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:padding="16dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"
+            android:elevation="50dp"
+            android:text="@string/try_again"
+            />
+    </LinearLayout>
+</FrameLayout>

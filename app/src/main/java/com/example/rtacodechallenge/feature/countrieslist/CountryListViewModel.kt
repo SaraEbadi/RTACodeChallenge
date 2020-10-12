@@ -6,50 +6,49 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rtacodechallenge.data.model.Country
 import com.example.rtacodechallenge.data.repository.CountriesRepository
-import com.example.rtacodechallenge.utils.UseCaseResponse
+import com.example.rtacodechallenge.utils.GeneralResponse
 import kotlinx.coroutines.launch
 import retrofit2.Response
 
 class CountryListViewModel(private val repository: CountriesRepository) : ViewModel() {
 
-    private val _selectedList = MutableLiveData<List<String>>()
+    val selectedCountriesListLiveData: LiveData<List<String>>?
+        get() = selectedCountiesListMutableLiveData
 
-    val selectedList: LiveData<List<String>>?
-        get() = _selectedList
+    val countriesListLiveData: LiveData<GeneralResponse<List<Country>>>
+        get() = countriesListMutableLiveData
 
+    private val selectedCountiesListMutableLiveData = MutableLiveData<List<String>>()
+    private val countriesListMutableLiveData = MutableLiveData<GeneralResponse<List<Country>>>()
     private var selectedCountriesList = mutableListOf<String>()
 
     init {
         getCountriesList()
     }
 
-    fun getCountriesList(): LiveData<UseCaseResponse<List<Country>>> {
-        val liveData: MutableLiveData<UseCaseResponse<List<Country>>> = MutableLiveData()
+    private fun getCountriesList() {
+        countriesListMutableLiveData.postValue(GeneralResponse.Loading())
         viewModelScope.launch {
-            liveData.postValue(handleCountriesListResponse(repository.getCountries()))
+            countriesListMutableLiveData.postValue(handleCountriesListResponse(repository.getCountries()))
         }
-        return liveData
     }
 
-    private fun handleCountriesListResponse(response: Response<List<Country>>): UseCaseResponse<List<Country>> {
+    private fun handleCountriesListResponse(response: Response<List<Country>>): GeneralResponse<List<Country>> {
         if (response.isSuccessful) {
-            response.body()?.let {
-                return UseCaseResponse.Success(it)
-            }
+            response.body()?.let { return GeneralResponse.Success(it) }
         }
-        return UseCaseResponse.Error(response.message())
+        return GeneralResponse.Error(response.message())
     }
 
     fun handleToggleItemsSelection(country: Country) {
         country.apply {
-            if (isAdded) {
+            if (isAdd && !selectedCountriesList.contains(name)) {
                 selectedCountriesList.add(name)
-            } else
+            } else {
                 selectedCountriesList.remove(name)
+            }
         }
-        _selectedList.value = selectedCountriesList
+        selectedCountiesListMutableLiveData.value = selectedCountriesList
     }
 
-    fun getLiveData(): LiveData<List<String>> =
-        _selectedList
 }

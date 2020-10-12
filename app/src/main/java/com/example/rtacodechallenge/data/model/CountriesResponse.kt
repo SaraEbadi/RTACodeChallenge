@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 @JsonClass(generateAdapter = true)
 data class Country(
     val name: String,
-    var isAdded: Boolean = false
+    var isAdd: Boolean = false
 )
 
 @Parcelize
