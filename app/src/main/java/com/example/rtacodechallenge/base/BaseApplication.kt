@@ -14,7 +14,7 @@ class BaseApplication : Application() {
         koinConfig()
     }
 
-    private fun koinConfig(){
+    private fun koinConfig() {
         startKoin {
             androidLogger()
             androidContext(this@BaseApplication)

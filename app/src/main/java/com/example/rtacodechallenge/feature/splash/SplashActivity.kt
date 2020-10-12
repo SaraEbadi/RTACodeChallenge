@@ -6,7 +6,6 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkCapabilities.*
 import android.os.Bundle
-import android.view.View
 import android.view.View.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.rtacodechallenge.MainActivity
@@ -20,7 +19,6 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
         checkNetworkConnection()
         btnRetry.setOnClickListener {
-            pgCenter.visibility = VISIBLE
             checkNetworkConnection()
         }
     }
@@ -35,13 +33,14 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun checkNetworkConnection() {
+        pgCenter.visibility = VISIBLE
         if (isOnline()) {
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         } else {
             llErrorCenter.visibility = VISIBLE
+            pgCenter.visibility = INVISIBLE
         }
-        pgCenter.visibility = INVISIBLE
     }
 
     private fun networkCapabilities(capabilities: NetworkCapabilities) =

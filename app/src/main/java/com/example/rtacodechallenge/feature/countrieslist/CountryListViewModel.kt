@@ -23,10 +23,20 @@ class CountryListViewModel(private val repository: CountriesRepository) : ViewMo
     private var selectedCountriesList = mutableListOf<String>()
 
     init {
-        getCountriesList()
+        getCountriesData()
     }
 
-    private fun getCountriesList() {
+    fun changeToggleSelectedItems(country: Country) {
+        country.apply {
+            if (isAdd && !selectedCountriesList.contains(name))
+                selectedCountriesList.add(name)
+            else
+                selectedCountriesList.remove(name)
+        }
+        selectedCountiesListMutableLiveData.value = selectedCountriesList
+    }
+
+    private fun getCountriesData() {
         countriesListMutableLiveData.postValue(GeneralResponse.Loading())
         viewModelScope.launch {
             countriesListMutableLiveData.postValue(handleCountriesListResponse(repository.getCountries()))
@@ -39,16 +49,4 @@ class CountryListViewModel(private val repository: CountriesRepository) : ViewMo
         }
         return GeneralResponse.Error(response.message())
     }
-
-    fun handleToggleItemsSelection(country: Country) {
-        country.apply {
-            if (isAdd && !selectedCountriesList.contains(name)) {
-                selectedCountriesList.add(name)
-            } else {
-                selectedCountriesList.remove(name)
-            }
-        }
-        selectedCountiesListMutableLiveData.value = selectedCountriesList
-    }
-
 }

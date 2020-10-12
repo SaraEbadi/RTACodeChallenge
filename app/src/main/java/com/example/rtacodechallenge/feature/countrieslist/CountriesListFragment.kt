@@ -49,7 +49,7 @@ class CountriesListFragment : BaseFragment() {
     private fun setUpViews() {
         countryAdapter = CountryAdapter(mutableListOf(), object : CountryAdapterCallback {
             override fun onAddClicked(country: Country) {
-                viewModel.handleToggleItemsSelection(country)
+                viewModel.changeToggleSelectedItems(country)
             }
         })
         rvCountries.adapter = countryAdapter

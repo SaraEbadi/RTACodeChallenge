@@ -10,7 +10,7 @@ fun Button.changeButtonAppearance(btnColor: Int, btnText: Int) {
     text = context.getString(btnText)
 }
 
-fun Button.toggleSelection(isAdd: Boolean) {
+fun Button.changeToggleSelectedItemsView(isAdd: Boolean) {
     changeButtonAppearance(R.color.colorPrimary, R.string.add)
     if (isAdd)
         changeButtonAppearance(R.color.colorDarkGray, R.string.added)

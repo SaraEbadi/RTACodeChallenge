@@ -17,8 +17,6 @@ Fapp/src/main/java/com/example/rtacodechallenge/base/BaseApplication.kt,b/9/b9f
 Napp/src/main/java/com/example/rtacodechallenge/data/model/CountriesResponse.kt,e/f/efcb7744b21c97bf63913e20ff46d816b5a3c0c2
 r
 Bapp/src/main/java/com/example/rtacodechallenge/di/NetworkModule.kt,3/d/3d439091c65b07d3344e8c0bc00596df0d8e20c0
-w
-Gapp/src/main/java/com/example/rtacodechallenge/utils/UseCaseResponse.kt,f/7/f752e64c35e4b2d0f729073c487dfa8ccd59865f
 ‰
 Yapp/src/main/java/com/example/rtacodechallenge/data/repository/remote/CountriesService.kt,d/c/dce254a27d6cea64def7d947121c1731f106a706
 …
@@ -43,7 +41,3 @@ v
 Fapp/src/main/java/com/example/rtacodechallenge/utils/ViewExtentions.kt,4/1/41ce0abdefd4e8dc0c23781a05e99446f400aee7
 
 Oapp/src/main/java/com/example/rtacodechallenge/feature/splash/SplashActivity.kt,f/7/f73b2605197b50de3254a7cf18fbca0dd20d4566
-€
-Papp/src/main/java/com/example/rtacodechallenge/feature/splash/SplashViewModel.kt,d/f/dfabc4f1611f9541745e3857253d106d774eedad
-‚
-Rapp/src/main/java/com/example/rtacodechallenge/data/repository/SplashRepository.kt,d/d/dd8d7f4d1391315ce536368fe5509d409af5accb

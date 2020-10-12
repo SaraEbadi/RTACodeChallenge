@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.rtacodechallenge.R
 import com.example.rtacodechallenge.data.model.Country
-import com.example.rtacodechallenge.utils.toggleSelection
+import com.example.rtacodechallenge.utils.changeToggleSelectedItemsView
 import kotlinx.android.synthetic.main.country_item.view.*
 
 class CountryAdapter(
@@ -43,24 +43,20 @@ class CountryAdapter(
 
         fun bind(country: Country) {
             with(itemView) {
-                    tvCountryName.text = country.name
-                    btnAdd.toggleSelection(country.isAdd)
+                country.apply {
+                    tvCountryName.text = name
+                    btnAdd.changeToggleSelectedItemsView(isAdd)
                     btnAdd.setOnClickListener {
-                        country.isAdd = !country.isAdd
-                        btnAdd.toggleSelection(country.isAdd)
+                        isAdd = !isAdd
+                        btnAdd.changeToggleSelectedItemsView(isAdd)
                         countryAdapterCallback.onAddClicked(country)
+                    }
                 }
             }
         }
     }
 }
 
-/**
- * Callback for calculating the diff between two non-null items in a list.
- *
- * Used by ListAdapter to calculate the minimum number of changes between and old list and a new
- * list that's been passed to `submitList`.
- */
 class CountryListDiffCallback(
     private val newList: List<Country>, private val oldList: List<Country>
 ) : DiffUtil.Callback() {
